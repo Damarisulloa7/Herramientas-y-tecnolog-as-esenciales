@@ -6,15 +6,14 @@
     <title>Aura Glow Cosmetics - Tienda de Maquillaje</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome para iconos -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* === ESTILOS PERSONALIZADOS (mejoran el diseño sin alterar contenido) === */
+        /* ===== ESTILOS (los mismos de la Semana 4) ===== */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
         }
-        /* Cabecera con degradado */
         .custom-header {
             background: linear-gradient(135deg, #d4a5a5, #b5838d);
             color: white;
@@ -26,7 +25,6 @@
             font-weight: 700;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        /* Barra de navegación personalizada */
         .navbar-custom {
             background-color: #6d6875;
         }
@@ -44,7 +42,6 @@
         .navbar-custom .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.7%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
-        /* Títulos de sección */
         .section-title {
             color: #6d6875;
             font-weight: 600;
@@ -53,7 +50,6 @@
             margin-bottom: 1.5rem;
             display: inline-block;
         }
-        /* Tarjetas con efecto hover */
         .card {
             border: none;
             border-radius: 12px;
@@ -68,7 +64,6 @@
             color: #6d6875;
             font-weight: 600;
         }
-        /* Botones personalizados */
         .btn-primary {
             background-color: #b5838d;
             border-color: #b5838d;
@@ -77,19 +72,24 @@
             background-color: #6d6875;
             border-color: #6d6875;
         }
-        /* Aside mejorado */
+        .btn-danger {
+            background-color: #e5989b;
+            border-color: #e5989b;
+        }
+        .btn-danger:hover {
+            background-color: #d4a5a5;
+            border-color: #d4a5a5;
+        }
         .custom-aside {
             background-color: #ffe5e5;
             border-radius: 12px;
             padding: 1.5rem;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        /* Imagen responsiva */
         .img-fluid {
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        /* Iconos de redes sociales */
         .social-icons a {
             color: #6d6875;
             font-size: 1.5rem;
@@ -99,7 +99,6 @@
         .social-icons a:hover {
             color: #e5989b;
         }
-        /* Footer */
         .custom-footer {
             background-color: #6d6875;
             color: white;
@@ -113,7 +112,11 @@
         .custom-footer a:hover {
             text-decoration: underline;
         }
-        /* Media query personalizada para pantallas pequeñas */
+        /* Estilo para elementos eliminados con fade */
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
         @media (max-width: 576px) {
             .custom-header h1 {
                 font-size: 2rem;
@@ -126,18 +129,18 @@
 </head>
 <body>
 
-<!-- ========== HEADER (exactamente igual, solo con clase para estilizar) ========== -->
+<!-- ===== HEADER ===== -->
 <header class="custom-header">
     <div class="container">
         <h1>Aura Glow Cosmetics</h1>
     </div>
 </header>
 
-<!-- ========== NAVBAR (menú responsivo con Bootstrap, conservando los mismos enlaces) ========== -->
+<!-- ===== NAVBAR ===== -->
 <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container">
         <a class="navbar-brand text-white" href="#inicio">Aura Glow</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -151,23 +154,22 @@
     </div>
 </nav>
 
-<!-- ========== MAIN (contenido principal en grillas de Bootstrap) ========== -->
+<!-- ===== MAIN ===== -->
 <main class="container my-4">
     <div class="row">
-        <!-- CONTENIDO PRINCIPAL (columna 9 en pantallas grandes) -->
+        <!-- CONTENIDO PRINCIPAL -->
         <div class="col-lg-9">
             
-            <!-- SECCIÓN INICIO (mismo contenido, pero con botón y mejor presentación) -->
+            <!-- SECCIÓN INICIO -->
             <section id="inicio" class="mb-5">
                 <h2 class="section-title">Bienvenidos a Aura Glow</h2>
                 <article>
                     <p>Resalta tu belleza única con nuestra exclusiva línea de maquillaje y productos de cuidado facial. En Aura Glow Cosmetics nos apasiona ofrecerte cosméticos de la más alta calidad, diseñados para cuidar tu piel y brindarte un acabado profesional todos los días. ¡Explora nuestro catálogo y encuentra tu brillo ideal!</p>
-                    <!-- Botón añadido para mejorar visualmente (nuevo) -->
                     <a href="#contacto" class="btn btn-primary">Contáctanos</a>
                 </article>
             </section>
 
-            <!-- SECCIÓN QUIÉNES SOMOS (mismo texto, imagen, ahora en columnas y responsiva) -->
+            <!-- SECCIÓN QUIÉNES SOMOS -->
             <section id="quienes-somos" class="mb-5">
                 <h2 class="section-title">Quiénes Somos</h2>
                 <article>
@@ -177,15 +179,14 @@
                             <p>Creemos firmemente que el maquillaje no es una herramienta para ocultar imperfecciones, sino un poderoso medio de arte y empoderamiento personal que permite reflejar la seguridad interior. Nuestro equipo está conformado por expertos en cosmetología y estilismo, siempre listos para brindar una asesoría personalizada que ayude a potenciar la esencia única de cada persona. Nos proyectamos hacia el futuro como un referente en el mercado, impulsando la confianza y celebrando la belleza en todas sus formas y expresiones posibles.</p>
                         </div>
                         <div class="col-md-6">
-                            <!-- Imagen con clase img-fluid para que sea responsiva -->
-                            <img src="https://share.google/oQyPZc46f7f0Ft9Dj" alt="Variedad de cosméticos de Aura Glow" class="img-fluid">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800" alt="Cosméticos de Aura Glow" class="img-fluid">
                             <p class="text-muted mt-2"><em>Nuestra selección de cosméticos de alta calidad.</em></p>
                         </div>
                     </div>
                 </article>
             </section>
 
-            <!-- SECCIÓN SERVICIOS O PRODUCTOS (lista convertida en tarjetas de Bootstrap, conservando todo el contenido) -->
+            <!-- SECCIÓN SERVICIOS O PRODUCTOS -->
             <section id="servicios-productos" class="mb-5">
                 <h2 class="section-title">Nuestros Productos y Servicios</h2>
                 
@@ -265,20 +266,19 @@
                 </article>
             </section>
 
-            <!-- SECCIÓN VIDEO (mismo contenido, ahora responsivo con clase ratio) -->
+            <!-- SECCIÓN VIDEO -->
             <section id="video-tutorial" class="mb-5">
                 <h2 class="section-title">Aprende con Nosotros</h2>
                 <p>Mira nuestro último tutorial sobre cómo lograr un maquillaje natural y radiante para el día a día:</p>
                 <div class="ratio ratio-16x9">
-                    <iframe src="https://share.google/gBUwwRviFB1TsgLMx" title="Tutorial de Maquillaje Aura Glow" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Tutorial de Maquillaje Aura Glow" allowfullscreen></iframe>
                 </div>
             </section>
 
-            <!-- SECCIÓN CONTACTO (conserva correo, teléfono, dirección, redes y AÑADE formulario) -->
+            <!-- SECCIÓN CONTACTO -->
             <section id="contacto" class="mb-5">
                 <h2 class="section-title">Contacto</h2>
                 <div class="row">
-                    <!-- Columna del formulario (nuevo) -->
                     <div class="col-md-7">
                         <form>
                             <div class="mb-3">
@@ -300,7 +300,6 @@
                             <button type="submit" class="btn btn-primary">Enviar mensaje</button>
                         </form>
                     </div>
-                    <!-- Columna de datos de contacto (exactamente igual que antes, pero mejor presentada) -->
                     <div class="col-md-5">
                         <div class="p-3 bg-light rounded">
                             <p><strong>Correo electrónico:</strong> <a href="mailto:damarisanette07@gmail.com">AuraGlow@gmail.com</a></p>
@@ -308,18 +307,61 @@
                             <p><strong>Dirección:</strong> Avenida Maldonado, Guamani, Quito, Ecuador</p>
                             <p><strong>Síguenos en redes sociales:</strong></p>
                             <div class="social-icons">
-                                <a href="https://www.instagram.com/dmriz_ank?igsh=MXA4aWxhenc3N3V1aA==" target="_blank"><i class="fab fa-instagram"></i></a>
-                                <a href="https://www.facebook.com/share/1J8LhXNKky/" target="_blank"><i class="fab fa-facebook"></i></a>
-                                <a href="https://www.tiktok.com/@anette_dt?_r=1&_t=ZS-97Dd7HRAMkP" target="_blank"><i class="fab fa-tiktok"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-        </div>
+            <!-- =================================================== -->
+            <!-- === SECCIÓN DINÁMICA: GESTIÓN DE PRODUCTOS (NUEVO) === -->
+            <!-- =================================================== -->
+            <section id="gestion-productos" class="mb-5">
+                <h2 class="section-title">Gestión de Productos</h2>
+                <p>Registra tus productos favoritos de Aura Glow Cosmetics.</p>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <form id="formProducto">
+                            <div class="mb-3">
+                                <label for="nombreProducto" class="form-label">Nombre del Producto</label>
+                                <input type="text" class="form-control" id="nombreProducto" placeholder="Ej: Base Líquida" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="categoriaProducto" class="form-label">Categoría</label>
+                                <select class="form-select" id="categoriaProducto">
+                                    <option value="Maquillaje">Maquillaje</option>
+                                    <option value="Cuidado Facial">Cuidado Facial</option>
+                                    <option value="Labiales">Labiales</option>
+                                    <option value="Sombras">Sombras</option>
+                                    <option value="Otros">Otros</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="descripcionProducto" class="form-label">Descripción</label>
+                                <textarea class="form-control" id="descripcionProducto" rows="2" placeholder="Breve descripción del producto"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                        </form>
+                        <div id="mensajeValidacion" class="mt-2"></div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h3>Productos Registrados <span class="badge bg-primary" id="contadorProductos">0</span></h3>
+                        <ul id="listaProductos" class="list-group">
+                            <!-- Los productos se agregarán aquí dinámicamente -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <!-- ===== FIN SECCIÓN DINÁMICA ===== -->
 
-        <!-- ========== ASIDE (mismo contenido, solo mejorado visualmente) ========== -->
+        </div> <!-- fin col-lg-9 -->
+
+        <!-- ===== ASIDE ===== -->
         <aside class="col-lg-3 custom-aside">
             <h3>Promociones y Avisos</h3>
             <p><strong>¡Gran Apertura!</strong> Obtén un 15% de descuento en tu primera compra registrándote a nuestro boletín de novedades.</p>
@@ -328,18 +370,22 @@
             <p>Lunes a Viernes: 09:00 AM - 19:00 PM</p>
             <p>Sábados: 10:00 AM - 16:00 PM</p>
         </aside>
-    </div>
+
+    </div> <!-- fin row -->
 </main>
 
-<!-- ========== FOOTER (exactamente igual) ========== -->
+<!-- ===== FOOTER ===== -->
 <footer class="custom-footer text-center">
     <div class="container">
         <p class="mb-0">&copy; 2026 - Diseñado por: DAMARIS ANETTE ULLOA GUALLI | Asignatura: Desarrollo de Aplicaciones Web | Año: 2026</p>
     </div>
 </footer>
 
-<!-- Bootstrap JS (necesario para el menú colapsable) -->
+<!-- ===== SCRIPTS ===== -->
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Archivo JavaScript externo -->
+<script src="script.js"></script>
 
 </body>
 </html>
