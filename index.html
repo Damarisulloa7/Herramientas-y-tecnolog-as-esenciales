@@ -9,7 +9,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ===== ESTILOS (los mismos de la Semana 4) ===== */
+        /* ===== ESTILOS (los mismos de semanas anteriores) ===== */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
@@ -116,6 +116,11 @@
         .fade-out {
             opacity: 0;
             transition: opacity 0.3s;
+        }
+        /* Pequeño ajuste para mensajes de validación */
+        .invalid-feedback, .valid-feedback {
+            display: block;
+            font-size: 0.9rem;
         }
         @media (max-width: 576px) {
             .custom-header h1 {
@@ -317,7 +322,7 @@
             </section>
 
             <!-- =================================================== -->
-            <!-- === SECCIÓN DINÁMICA: GESTIÓN DE PRODUCTOS (NUEVO) === -->
+            <!-- === SECCIÓN DINÁMICA: GESTIÓN DE PRODUCTOS (MEJORADA) === -->
             <!-- =================================================== -->
             <section id="gestion-productos" class="mb-5">
                 <h2 class="section-title">Gestión de Productos</h2>
@@ -325,27 +330,59 @@
                 
                 <div class="row">
                     <div class="col-md-6">
-                        <form id="formProducto">
+                        <!-- Formulario con nuevas validaciones -->
+                        <form id="formProducto" novalidate>
+                            <!-- Campo Nombre -->
                             <div class="mb-3">
-                                <label for="nombreProducto" class="form-label">Nombre del Producto</label>
-                                <input type="text" class="form-control" id="nombreProducto" placeholder="Ej: Base Líquida" required>
+                                <label for="nombreProducto" class="form-label">Nombre del Producto *</label>
+                                <input type="text" class="form-control" id="nombreProducto" 
+                                       placeholder="Ej: Base Líquida" required
+                                       minlength="3" maxlength="50">
+                                <div class="invalid-feedback" id="nombreFeedback">
+                                    El nombre debe tener al menos 3 caracteres.
+                                </div>
+                                <div class="valid-feedback">
+                                    ¡Nombre válido!
+                                </div>
                             </div>
+
+                            <!-- Campo Categoría -->
                             <div class="mb-3">
-                                <label for="categoriaProducto" class="form-label">Categoría</label>
-                                <select class="form-select" id="categoriaProducto">
+                                <label for="categoriaProducto" class="form-label">Categoría *</label>
+                                <select class="form-select" id="categoriaProducto" required>
+                                    <option value="">Selecciona una categoría</option>
                                     <option value="Maquillaje">Maquillaje</option>
                                     <option value="Cuidado Facial">Cuidado Facial</option>
                                     <option value="Labiales">Labiales</option>
                                     <option value="Sombras">Sombras</option>
                                     <option value="Otros">Otros</option>
                                 </select>
+                                <div class="invalid-feedback" id="categoriaFeedback">
+                                    Por favor, selecciona una categoría.
+                                </div>
+                                <div class="valid-feedback">
+                                    ¡Categoría seleccionada!
+                                </div>
                             </div>
+
+                            <!-- Campo Descripción -->
                             <div class="mb-3">
-                                <label for="descripcionProducto" class="form-label">Descripción</label>
-                                <textarea class="form-control" id="descripcionProducto" rows="2" placeholder="Breve descripción del producto"></textarea>
+                                <label for="descripcionProducto" class="form-label">Descripción *</label>
+                                <textarea class="form-control" id="descripcionProducto" rows="2" 
+                                          placeholder="Breve descripción del producto" required
+                                          minlength="10" maxlength="200"></textarea>
+                                <div class="invalid-feedback" id="descripcionFeedback">
+                                    La descripción debe tener al menos 10 caracteres.
+                                </div>
+                                <div class="valid-feedback">
+                                    ¡Descripción válida!
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+
+                            <button type="submit" class="btn btn-primary" id="btnAgregar">Agregar Producto</button>
                         </form>
+
+                        <!-- Mensaje de validación general (para errores que no son por campo) -->
                         <div id="mensajeValidacion" class="mt-2"></div>
                     </div>
                     
