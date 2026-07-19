@@ -1,10 +1,59 @@
-// =====================================================
-// SCRIPT PARA LA GESTIÓN DE PRODUCTOS CON VALIDACIONES DINÁMICAS (Semana 6)
-// =====================================================
+// =============================================================
+// SCRIPT PARA AURA GLOW COSMETICS - Semana 7
+// =============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // ===== ELEMENTOS DEL DOM =====
+
+    // =========================================================
+    // 1. DATOS DE EJEMPLO (arreglo de objetos)
+    // =========================================================
+    const productosDestacados = [
+        { id: 1, nombre: 'Base Líquida Matte', categoria: 'Maquillaje', descripcion: 'Cobertura media-alta, acabado mate, 12h de duración.', estado: 'disponible' },
+        { id: 2, nombre: 'Paleta de Sombras Nude', categoria: 'Sombras', descripcion: '10 tonos tierra y rosados, alta pigmentación.', estado: 'disponible' },
+        { id: 3, nombre: 'Labial Líquido Rojo', categoria: 'Labiales', descripcion: 'Rojo intenso, acabado mate, larga duración.', estado: 'agotado' },
+        { id: 4, nombre: 'Crema Hidratante Facial', categoria: 'Cuidado Facial', descripcion: 'Hidratación profunda con ácido hialurónico.', estado: 'disponible' }
+    ];
+
+    // =========================================================
+    // 2. RENDERIZAR PRODUCTOS DESTACADOS (estructura repetitiva)
+    // =========================================================
+    const contenedorProductos = document.getElementById('productosDestacados');
+
+    function renderizarProductosDestacados() {
+        contenedorProductos.innerHTML = ''; // Limpiar
+        productosDestacados.forEach(producto => {
+            // Condicional para mostrar el badge según el estado
+            let badgeHtml = '';
+            if (producto.estado === 'disponible') {
+                badgeHtml = `<span class="badge bg-success">Disponible</span>`;
+            } else if (producto.estado === 'agotado') {
+                badgeHtml = `<span class="badge bg-danger">Agotado</span>`;
+            } else {
+                badgeHtml = `<span class="badge bg-warning text-dark">Próximamente</span>`;
+            }
+
+            const col = document.createElement('div');
+            col.className = 'col';
+            col.innerHTML = `
+                <div class="card h-100 text-center p-3">
+                    <i class="fas fa-box fa-3x text-primary"></i>
+                    <div class="card-body">
+                        <h5 class="card-title">${producto.nombre}</h5>
+                        <p class="card-text">${producto.descripcion}</p>
+                        <p><strong>Categoría:</strong> ${producto.categoria}</p>
+                        ${badgeHtml}
+                    </div>
+                </div>
+            `;
+            contenedorProductos.appendChild(col);
+        });
+    }
+
+    renderizarProductosDestacados();
+
+    // =========================================================
+    // 3. GESTIÓN DE PRODUCTOS (registro dinámico)
+    // =========================================================
     const formProducto = document.getElementById('formProducto');
     const nombreInput = document.getElementById('nombreProducto');
     const categoriaSelect = document.getElementById('categoriaProducto');
@@ -14,69 +63,89 @@ document.addEventListener('DOMContentLoaded', function() {
     const mensajeValidacion = document.getElementById('mensajeValidacion');
     const btnAgregar = document.getElementById('btnAgregar');
 
-    // ===== VARIABLES =====
-    let contador = 0;
+    // Contador de productos registrados manualmente
+    let contadorProductos = 0;
 
-    // ===== FUNCIONES DE VALIDACIÓN POR CAMPO =====
+    // =========================================================
+    // 4. FUNCIONES DE VALIDACIÓN DINÁMICA
+    // =========================================================
 
-    // Validar nombre: no vacío y mínimo 3 caracteres
+    // Validar nombre (mínimo 3 caracteres)
     function validarNombre() {
         const valor = nombreInput.value.trim();
-        const esValido = valor.length >= 3 && valor.length <= 50;
-        if (esValido) {
+        if (valor.length < 3) {
+            nombreInput.classList.add('is-invalid');
+            nombreInput.classList.remove('is-valid');
+            document.getElementById('nombreError').style.display = 'block';
+            return false;
+        } else {
             nombreInput.classList.remove('is-invalid');
             nombreInput.classList.add('is-valid');
-        } else {
-            nombreInput.classList.remove('is-valid');
-            nombreInput.classList.add('is-invalid');
+            document.getElementById('nombreError').style.display = 'none';
+            return true;
         }
-        return esValido;
     }
 
-    // Validar categoría: debe seleccionar una opción distinta a la primera (vacía)
+    // Validar categoría (no vacía)
     function validarCategoria() {
-        const esValido = categoriaSelect.value !== '';
-        if (esValido) {
+        const valor = categoriaSelect.value;
+        if (valor === '') {
+            categoriaSelect.classList.add('is-invalid');
+            categoriaSelect.classList.remove('is-valid');
+            document.getElementById('categoriaError').style.display = 'block';
+            return false;
+        } else {
             categoriaSelect.classList.remove('is-invalid');
             categoriaSelect.classList.add('is-valid');
-        } else {
-            categoriaSelect.classList.remove('is-valid');
-            categoriaSelect.classList.add('is-invalid');
+            document.getElementById('categoriaError').style.display = 'none';
+            return true;
         }
-        return esValido;
     }
 
-    // Validar descripción: no vacía y mínimo 10 caracteres
+    // Validar descripción (mínimo 10 caracteres)
     function validarDescripcion() {
         const valor = descripcionInput.value.trim();
-        const esValido = valor.length >= 10 && valor.length <= 200;
-        if (esValido) {
+        if (valor.length < 10) {
+            descripcionInput.classList.add('is-invalid');
+            descripcionInput.classList.remove('is-valid');
+            document.getElementById('descripcionError').style.display = 'block';
+            return false;
+        } else {
             descripcionInput.classList.remove('is-invalid');
             descripcionInput.classList.add('is-valid');
-        } else {
-            descripcionInput.classList.remove('is-valid');
-            descripcionInput.classList.add('is-invalid');
+            document.getElementById('descripcionError').style.display = 'none';
+            return true;
         }
-        return esValido;
     }
 
     // Validar todo el formulario
     function validarFormulario() {
-        const nombreValido = validarNombre();
-        const categoriaValida = validarCategoria();
-        const descripcionValida = validarDescripcion();
-        return nombreValido && categoriaValida && descripcionValida;
+        const valNombre = validarNombre();
+        const valCategoria = validarCategoria();
+        const valDescripcion = validarDescripcion();
+        return valNombre && valCategoria && valDescripcion;
     }
 
-    // ===== FUNCIÓN PARA MOSTRAR MENSAJES GENERALES =====
-    function mostrarMensajeGeneral(mensaje, tipo = 'danger') {
+    // =========================================================
+    // 5. EVENTOS EN TIEMPO REAL (input, blur)
+    // =========================================================
+    nombreInput.addEventListener('input', validarNombre);
+    nombreInput.addEventListener('blur', validarNombre);
+    categoriaSelect.addEventListener('change', validarCategoria);
+    categoriaSelect.addEventListener('blur', validarCategoria);
+    descripcionInput.addEventListener('input', validarDescripcion);
+    descripcionInput.addEventListener('blur', validarDescripcion);
+
+    // =========================================================
+    // 6. MOSTRAR MENSAJES DE RETROALIMENTACIÓN
+    // =========================================================
+    function mostrarMensaje(mensaje, tipo = 'success') {
         mensajeValidacion.innerHTML = `
             <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
                 ${mensaje}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         `;
-        // Auto-eliminar mensaje después de 4 segundos
         setTimeout(() => {
             const alert = mensajeValidacion.querySelector('.alert');
             if (alert) {
@@ -86,30 +155,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 4000);
     }
 
-    // ===== FUNCIÓN PARA ACTUALIZAR EL CONTADOR =====
-    function actualizarContador() {
-        contadorSpan.textContent = contador;
-    }
-
-    // ===== FUNCIÓN PARA AGREGAR UN PRODUCTO (solo si es válido) =====
-    function agregarProducto(event) {
+    // =========================================================
+    // 7. AGREGAR PRODUCTO (evento submit)
+    // =========================================================
+    formProducto.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        // Validar todos los campos antes de agregar
+        // Validar todo el formulario
         if (!validarFormulario()) {
-            mostrarMensajeGeneral('⚠️ Por favor, corrige los campos marcados en rojo.', 'warning');
+            mostrarMensaje('❌ Por favor, corrige los campos marcados en rojo.', 'danger');
             return;
         }
 
-        // Obtener valores
+        // Obtener datos
         const nombre = nombreInput.value.trim();
         const categoria = categoriaSelect.value;
         const descripcion = descripcionInput.value.trim();
 
-        // Mostrar mensaje de éxito
-        mostrarMensajeGeneral('✅ Producto agregado correctamente.', 'success');
-
-        // ===== CREAR EL ELEMENTO DEL PRODUCTO =====
+        // Crear elemento li
         const li = document.createElement('li');
         li.className = 'list-group-item d-flex justify-content-between align-items-center';
 
@@ -123,13 +186,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const btnEliminar = document.createElement('button');
         btnEliminar.className = 'btn btn-danger btn-sm';
         btnEliminar.innerHTML = '<i class="fas fa-trash"></i> Eliminar';
+
         btnEliminar.addEventListener('click', function() {
             li.classList.add('fade-out');
             setTimeout(() => {
                 li.remove();
-                contador--;
+                contadorProductos--;
                 actualizarContador();
-                mostrarMensajeGeneral('🗑️ Producto eliminado.', 'info');
+                mostrarMensaje('🗑️ Producto eliminado correctamente.', 'info');
             }, 300);
         });
 
@@ -137,36 +201,33 @@ document.addEventListener('DOMContentLoaded', function() {
         li.appendChild(btnEliminar);
         listaProductos.appendChild(li);
 
-        // Incrementar contador
-        contador++;
+        // Actualizar contador
+        contadorProductos++;
         actualizarContador();
 
-        // Resetear formulario y quitar clases de validación
+        // Limpiar formulario y resetear validaciones
         formProducto.reset();
         nombreInput.classList.remove('is-valid', 'is-invalid');
         categoriaSelect.classList.remove('is-valid', 'is-invalid');
         descripcionInput.classList.remove('is-valid', 'is-invalid');
-        nombreInput.focus();
+        document.getElementById('nombreError').style.display = 'none';
+        document.getElementById('categoriaError').style.display = 'none';
+        document.getElementById('descripcionError').style.display = 'none';
 
-        // Desplazar suavemente hacia la lista
-        listaProductos.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        mostrarMensaje('✅ Producto agregado correctamente.', 'success');
+        nombreInput.focus();
+    });
+
+    // =========================================================
+    // 8. ACTUALIZAR CONTADOR
+    // =========================================================
+    function actualizarContador() {
+        contadorSpan.textContent = contadorProductos;
     }
 
-    // ===== ASIGNAR EVENTOS EN TIEMPO REAL =====
-    // Evento input: valida mientras el usuario escribe
-    nombreInput.addEventListener('input', validarNombre);
-    descripcionInput.addEventListener('input', validarDescripcion);
-    categoriaSelect.addEventListener('change', validarCategoria);
-
-    // Evento blur: valida al salir del campo (para dar feedback adicional)
-    nombreInput.addEventListener('blur', validarNombre);
-    descripcionInput.addEventListener('blur', validarDescripcion);
-    categoriaSelect.addEventListener('blur', validarCategoria);
-
-    // Evento submit del formulario
-    formProducto.addEventListener('submit', agregarProducto);
-
-    // ===== FUNCIÓN PARA AGREGAR PRODUCTOS DE EJEMPLO =====
+    // =========================================================
+    // 9. CARGAR PRODUCTOS DE EJEMPLO AL INICIAR
+    // =========================================================
     function agregarProductoEjemplo(nombre, categoria, descripcion) {
         const li = document.createElement('li');
         li.className = 'list-group-item d-flex justify-content-between align-items-center';
@@ -178,24 +239,22 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <button class="btn btn-danger btn-sm eliminar-producto"><i class="fas fa-trash"></i> Eliminar</button>
         `;
-        
         const btnEliminar = li.querySelector('.eliminar-producto');
         btnEliminar.addEventListener('click', function() {
             li.classList.add('fade-out');
             setTimeout(() => {
                 li.remove();
-                contador--;
+                contadorProductos--;
                 actualizarContador();
             }, 300);
         });
-        
         listaProductos.appendChild(li);
-        contador++;
+        contadorProductos++;
         actualizarContador();
     }
 
-    // Cargar productos de ejemplo
-    agregarProductoEjemplo('Base Líquida Matte', 'Maquillaje', 'Cobertura media-alta, acabado mate, 12 horas de duración.');
+    // Agregar 3 productos de muestra
+    agregarProductoEjemplo('Base Líquida Matte', 'Maquillaje', 'Cobertura media-alta, acabado mate, 12h de duración.');
     agregarProductoEjemplo('Paleta de Sombras Nude', 'Sombras', '10 tonos tierra y rosados, alta pigmentación.');
     agregarProductoEjemplo('Labial Líquido Rojo', 'Labiales', 'Rojo intenso, acabado mate, larga duración.');
 
