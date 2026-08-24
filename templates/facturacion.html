@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2 class="section-title">Facturación</h2>
-<p>Registro de facturas emitidas.</p>
+<p>Registro de facturas emitidas. <span class="badge bg-secondary">{{ facturas|length }} facturas</span></p>
 
 <div class="table-responsive">
     <table class="table table-striped table-hover">
@@ -14,6 +14,7 @@
                 <th>Cliente</th>
                 <th>Fecha</th>
                 <th>Total</th>
+                <th>Estado</th>
             </tr>
         </thead>
         <tbody>
@@ -22,11 +23,18 @@
                 <td><span class="badge bg-primary">{{ factura.id }}</span></td>
                 <td>{{ factura.cliente }}</td>
                 <td>{{ factura.fecha }}</td>
-                <td>{{ factura.total }}</td>
+                <td>${{ "%.2f"|format(factura.total) }}</td>
+                <td>
+                    {% if factura.estado == 'Pagado' %}
+                        <span class="badge bg-success">{{ factura.estado|upper }}</span>
+                    {% else %}
+                        <span class="badge bg-warning text-dark">{{ factura.estado|upper }}</span>
+                    {% endif %}
+                </td>
             </tr>
             {% else %}
             <tr>
-                <td colspan="4" class="text-center">No hay facturas registradas.</td>
+                <td colspan="5" class="text-center">No hay facturas registradas.</td>
             </tr>
             {% endfor %}
         </tbody>

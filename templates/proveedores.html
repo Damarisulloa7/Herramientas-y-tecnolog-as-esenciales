@@ -4,27 +4,37 @@
 
 {% block content %}
 <h2 class="section-title">Nuestros Proveedores</h2>
-<p>Lista de proveedores que nos abastecen.</p>
+<p>Lista de proveedores que nos abastecen. <span class="badge bg-secondary">{{ proveedores|length }} proveedores</span></p>
 
 <div class="table-responsive">
     <table class="table table-striped table-hover">
         <thead class="table-dark">
             <tr>
+                <th>#</th>
                 <th>Empresa</th>
                 <th>Contacto</th>
                 <th>Teléfono</th>
+                <th>País</th>
             </tr>
         </thead>
         <tbody>
             {% for proveedor in proveedores %}
             <tr>
+                <td>{{ loop.index }}</td>
                 <td>{{ proveedor.nombre }}</td>
                 <td>{{ proveedor.contacto }}</td>
                 <td>{{ proveedor.telefono }}</td>
+                <td>
+                    {% if proveedor.pais == 'Ecuador' %}
+                        <span class="badge bg-success">{{ proveedor.pais }}</span>
+                    {% else %}
+                        <span class="badge bg-info">{{ proveedor.pais }}</span>
+                    {% endif %}
+                </td>
             </tr>
             {% else %}
             <tr>
-                <td colspan="3" class="text-center">No hay proveedores registrados.</td>
+                <td colspan="5" class="text-center">No hay proveedores registrados.</td>
             </tr>
             {% endfor %}
         </tbody>
