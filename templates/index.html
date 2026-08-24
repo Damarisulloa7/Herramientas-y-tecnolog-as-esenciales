@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-9">
+        <!-- SECCIÓN INICIO -->
+        <section id="inicio" class="mb-5">
+            <h2 class="section-title">Bienvenidos a Aura Glow</h2>
+            <article>
+                <p>Resalta tu belleza única con nuestra exclusiva línea de maquillaje y productos de cuidado facial. En Aura Glow Cosmetics nos apasiona ofrecerte cosméticos de la más alta calidad, diseñados para cuidar tu piel y brindarte un acabado profesional todos los días. ¡Explora nuestro catálogo y encuentra tu brillo ideal!</p>
+                <a href="{{ url_for('productos') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-shopping-bag"></i> Ver Productos
+                </a>
+            </article>
+        </section>
+
+        <!-- SECCIÓN QUIÉNES SOMOS -->
+        <section id="quienes-somos" class="mb-5">
+            <h2 class="section-title">Quiénes Somos</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>En Aura Glow Cosmetics nacimos con el firme propósito de revolucionar el mundo de la belleza, ofreciendo una experiencia cosmética integral que combina la innovación estética con el cuidado de la salud cutánea. Somos un emprendimiento apasionado y comprometido con la autenticidad, la diversidad y la autoexpresión de cada uno de nuestros clientes. Desde nuestros inicios, nos hemos dedicado meticulosamente a seleccionar y distribuir productos de maquillaje que cumplen con los más altos estándares internacionales de calidad, garantizando fórmulas libres de crueldad animal, dermatológicamente probadas y enriquecidas con nutrientes esenciales.</p>
+                    <p>Creemos firmemente que el maquillaje no es una herramienta para ocultar imperfecciones, sino un poderoso medio de arte y empoderamiento personal que permite reflejar la seguridad interior. Nuestro equipo está conformado por expertos en cosmetología y estilismo, siempre listos para brindar una asesoría personalizada que ayude a potenciar la esencia única de cada persona. Nos proyectamos hacia el futuro como un referente en el mercado, impulsando la confianza y celebrando la belleza en todas sus formas y expresiones posibles.</p>
+                </div>
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename='img/equipo.jpg') }}" alt="Equipo de Aura Glow" class="img-fluid rounded shadow">
+                    <p class="text-muted mt-2"><em>Nuestro equipo apasionado por la belleza.</em></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN SERVICIOS / PRODUCTOS (resumen) -->
+        <section id="servicios-productos" class="mb-5">
+            <h2 class="section-title">Nuestros Servicios y Productos</h2>
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+                    <div class="card h-100 text-center shadow-sm">
+                        <div class="card-body">
+                            <i class="fas fa-paint-brush fa-3x text-primary"></i>
+                            <h5 class="card-title">Bases de Maquillaje</h5>
+                            <p class="card-text">Alta cobertura, acabado mate o luminoso, con protección solar.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 text-center shadow-sm">
+                        <div class="card-body">
+                            <i class="fas fa-palette fa-3x text-success"></i>
+                            <h5 class="card-title">Paletas de Sombras</h5>
+                            <p class="card-text">Tonos nude, metálicos y vibrantes de larga duración.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 text-center shadow-sm">
+                        <div class="card-body">
+                            <i class="fas fa-kiss-wink-heart fa-3x text-danger"></i>
+                            <h5 class="card-title">Labiales</h5>
+                            <p class="card-text">Hidratantes, mate indeleble, larga duración.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 text-center shadow-sm">
+                        <div class="card-body">
+                            <i class="fas fa-spa fa-3x text-info"></i>
+                            <h5 class="card-title">Cuidado Facial</h5>
+                            <p class="card-text">Serums, tónicos y cremas para preparar la piel.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN CONTACTO -->
+        <section id="contacto" class="mb-5">
+            <h2 class="section-title">Contacto</h2>
+            <div class="row">
+                <div class="col-md-7">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Tu nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="asunto" class="form-label">Asunto</label>
+                            <input type="text" class="form-control" id="asunto" placeholder="Asunto del mensaje">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mensaje" class="form-label">Mensaje</label>
+                            <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                    </form>
+                </div>
+                <div class="col-md-5">
+                    <div class="p-3 bg-light rounded shadow-sm">
+                        <p><strong><i class="fas fa-envelope"></i> Correo:</strong> <a href="mailto:damarisanette07@gmail.com">AuraGlow@gmail.com</a></p>
+                        <p><strong><i class="fas fa-phone"></i> Teléfono:</strong> <a href="tel:+593968372883">+593 968372883</a></p>
+                        <p><strong><i class="fas fa-map-marker-alt"></i> Dirección:</strong> Avenida Maldonado, Guamani, Quito</p>
+                        <p><strong><i class="fas fa-share-alt"></i> Redes:</strong></p>
+                        <div class="social-icons">
+                            <a href="#" class="me-2"><i class="fab fa-instagram fa-2x"></i></a>
+                            <a href="#" class="me-2"><i class="fab fa-facebook fa-2x"></i></a>
+                            <a href="#"><i class="fab fa-tiktok fa-2x"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ASIDE -->
+    <aside class="col-lg-3 custom-aside">
+        <h3><i class="fas fa-tags"></i> Promociones</h3>
+        <div class="alert alert-success" role="alert">
+            <i class="fas fa-gift"></i> <strong>¡Gran Apertura!</strong> 15% de descuento en tu primera compra.
+        </div>
+        <h4>Horarios</h4>
+        <ul class="list-unstyled">
+            <li><i class="fas fa-clock"></i> Lunes a Viernes: 09:00 - 19:00</li>
+            <li><i class="fas fa-clock"></i> Sábados: 10:00 - 16:00</li>
+        </ul>
+        <hr>
+        <p><strong>Próximo webinar:</strong> "Maquillaje profesional" - 30 de julio.</p>
+        <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetalle">
+            <i class="fas fa-info-circle"></i> Más información
+        </button>
+    </aside>
+</div>
+
+<!-- MODAL (opcional) -->
+<div class="modal fade" id="modalDetalle" tabindex="-1" aria-labelledby="modalDetalleLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-star"></i> Sobre Aura Glow</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>En Aura Glow Cosmetics nos enorgullece ofrecer productos libres de crueldad animal y con ingredientes de origen natural. Trabajamos con marcas líderes en el mercado y estamos en constante innovación para brindarte lo mejor en cuidado y maquillaje.</p>
+                <p><strong>Misión:</strong> Empoderar a las personas a través de la belleza.</p>
+                <p><strong>Visión:</strong> Ser referentes en cosmética ética en Latinoamérica.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

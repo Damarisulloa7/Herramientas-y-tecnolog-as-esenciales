@@ -1,0 +1,77 @@
+/* Estilos personalizados para Aura Glow Cosmetics */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #faf6f6;
+}
+.navbar-custom {
+    background: linear-gradient(135deg, #6d6875, #8a7a8a);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.navbar-custom .nav-link {
+    color: white !important;
+    font-weight: 500;
+    transition: 0.3s;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+}
+.navbar-custom .nav-link:hover {
+    background-color: rgba(255,255,255,0.15);
+    color: #ffd6e0 !important;
+}
+.section-title {
+    color: #6d6875;
+    font-weight: 600;
+    border-bottom: 4px solid #e5989b;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+.card {
+    border: none;
+    border-radius: 16px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #ffffff;
+}
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+.btn-primary {
+    background-color: #b5838d;
+    border-color: #b5838d;
+}
+.btn-primary:hover {
+    background-color: #6d6875;
+    border-color: #6d6875;
+}
+.custom-aside {
+    background-color: #ffe5e5;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.img-fluid {
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.social-icons a {
+    color: #6d6875;
+    transition: 0.3s;
+}
+.social-icons a:hover {
+    color: #e5989b;
+}
+.custom-footer {
+    background: linear-gradient(135deg, #6d6875, #8a7a8a);
+    color: white;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+}
+@media (max-width: 576px) {
+    .navbar-custom .navbar-brand {
+        font-size: 1.2rem;
+    }
+    .section-title {
+        font-size: 1.5rem;
+    }
+}

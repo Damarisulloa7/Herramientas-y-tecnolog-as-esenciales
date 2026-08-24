@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block titulo %}Facturación{% endblock %}
+
+{% block content %}
+<h2 class="section-title">Facturación</h2>
+<p>Registro de facturas emitidas.</p>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>N° Factura</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for factura in facturas %}
+            <tr>
+                <td><span class="badge bg-primary">{{ factura.id }}</span></td>
+                <td>{{ factura.cliente }}</td>
+                <td>{{ factura.fecha }}</td>
+                <td>{{ factura.total }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" class="text-center">No hay facturas registradas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
