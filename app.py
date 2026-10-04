@@ -1,3 +1,27 @@
+import sqlite3
+import os
+
+DB_PATH = os.path.join(os.path.dirname(__file__), 'data', 'ferreteria.db')
+
+def obtener_conexion_sqlite():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def inicializar_bd():
+    conn = obtener_conexion_sqlite()
+    cur = conn.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS productos (
+            id_producto INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            descripcion TEXT,
+            precio REAL NOT NULL,
+            stock INTEGER NOT NULL DEFAULT 0
+        )
+    """)
+    conn.commit()
+    conn.close()
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 from forms.producto_form import ProductoForm
@@ -50,14 +74,27 @@ facturas = [
 # ===== RUTAS =====
 @app.route('/productos')
 def productos():
-    return render_template('productos.html')
+    conn = obtener_conexion_sqlite()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM productos ORDER BY id_producto")
+    lista = cur.fetchall()
+    conn.close()
+    return render_template('productos.html', productos=lista)
 
 @app.route('/productos/agregar', methods=['GET', 'POST'])
 def agregar_producto():
     form = ProductoForm()
     form.id_proveedor.choices = [(0, 'Sin proveedor')]
     if form.validate_on_submit():
-        flash('Producto agregado correctamente (demo).', 'success')
+        conn = obtener_conexion_sqlite()
+        cur = conn.cursor()
+        cur.execute(
+            "INSERT INTO productos (nombre, descripcion, precio, stock) VALUES (?, ?, ?, ?)",
+            (form.nombre.data, form.descripcion.data, form.precio.data, form.stock.data)
+        )
+        conn.commit()
+        conn.close()
+        flash('Producto agregado correctamente.', 'success')
         return redirect(url_for('productos'))
     return render_template('formulario_producto.html', form=form, accion='Agregar')
 
