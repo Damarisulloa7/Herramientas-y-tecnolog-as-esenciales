@@ -1,3 +1,12 @@
+import os
+from flask import Flask, render_template, request, redirect, url_for, flash
+from forms.producto_form import ProductoForm
+from forms.cliente_form import ClienteForm
+from forms.proveedor_form import ProveedorForm
+from forms.facturacion_form import FacturacionForm
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'clave-secreta-aura-glow-2026'
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -39,27 +48,54 @@ facturas = [
 ]
 
 # ===== RUTAS =====
-@app.route('/')
-def index():
-    return render_template('index.html', nombre_sitio=nombre_sitio)
-
 @app.route('/productos')
 def productos():
-    return render_template('productos.html', productos=productos)
+    return render_template('productos.html')
+
+@app.route('/productos/agregar', methods=['GET', 'POST'])
+def agregar_producto():
+    form = ProductoForm()
+    form.id_proveedor.choices = [(0, 'Sin proveedor')]
+    if form.validate_on_submit():
+        flash('Producto agregado correctamente (demo).', 'success')
+        return redirect(url_for('productos'))
+    return render_template('formulario_producto.html', form=form, accion='Agregar')
 
 @app.route('/clientes')
 def clientes():
-    return render_template('clientes.html', clientes=clientes)
+    return render_template('clientes.html')
+
+@app.route('/clientes/agregar', methods=['GET', 'POST'])
+def agregar_cliente():
+    form = ClienteForm()
+    if form.validate_on_submit():
+        flash('Cliente agregado correctamente (demo).', 'success')
+        return redirect(url_for('clientes'))
+    return render_template('formulario_cliente.html', form=form, accion='Agregar')
 
 @app.route('/proveedores')
 def proveedores():
-    return render_template('proveedores.html', proveedores=proveedores)
+    return render_template('proveedores.html')
+
+@app.route('/proveedores/agregar', methods=['GET', 'POST'])
+def agregar_proveedor():
+    form = ProveedorForm()
+    if form.validate_on_submit():
+        flash('Proveedor agregado correctamente (demo).', 'success')
+        return redirect(url_for('proveedores'))
+    return render_template('formulario_proveedor.html', form=form, accion='Agregar')
 
 @app.route('/facturacion')
 def facturacion():
-    return render_template('facturacion.html', facturas=facturas)
+    return render_template('facturacion.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
-    
+@app.route('/facturacion/agregar', methods=['GET', 'POST'])
+def agregar_factura():
+    form = FacturacionForm()
+    form.id_cliente.choices = [(1, 'Cliente de ejemplo')]
+    if form.validate_on_submit():
+        flash('Factura registrada correctamente (demo).', 'success')
+        return redirect(url_for('facturacion'))
+    return render_template('formulario_facturacion.html', form=form, accion='Agregar')
+
     
